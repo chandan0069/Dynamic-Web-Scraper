@@ -1,0 +1,246 @@
+[
+  {
+    "source_id": "hacker_news",
+    "name": "Hacker News",
+    "url": "https://news.ycombinator.com",
+    "adapter_type": "rate_limited_http",
+    "extraction": {
+      "item_selector": "tr.athing",
+      "fields": [
+        {"name": "title", "selector": ".titleline > a", "attribute": null, "transform": "strip", "use_sibling_row": false},
+        {"name": "url", "selector": ".titleline > a", "attribute": "href", "transform": null, "use_sibling_row": false},
+        {"name": "score", "selector": ".score", "attribute": null, "transform": "strip", "use_sibling_row": true},
+        {"name": "author", "selector": ".hnuser", "attribute": null, "transform": "strip", "use_sibling_row": true},
+        {"name": "timestamp", "selector": ".age", "attribute": "title", "transform": null, "use_sibling_row": true},
+        {"name": "comments_count", "selector": "span.subline > a[href^='item']", "attribute": null, "transform": "strip", "use_sibling_row": true}
+      ],
+      "next_page_selector": "a.morelink",
+      "scroll_target": null,
+      "json_ld": false,
+      "mutation_target": null,
+      "max_pages": 50,
+      "max_scroll_iterations": 0
+    },
+    "scrape_interval_seconds": 300,
+    "enabled": true,
+    "auth_ref": null,
+    "health": {
+      "last_run_at": null,
+      "last_status": null,
+      "consecutive_failures": 0,
+      "average_latency_ms": 0.0,
+      "total_runs": 0,
+      "total_events_scraped": 0
+    }
+  },
+  {
+    "source_id": "reddit_worldnews",
+    "name": "Reddit World News",
+    "url": "https://www.reddit.com/r/worldnews/",
+    "adapter_type": "playwright",
+    "extraction": {
+      "item_selector": "shreddit-post",
+      "fields": [
+        {"name": "title", "selector": ":self", "attribute": "post-title", "transform": "strip"},
+        {"name": "url", "selector": ":self", "attribute": "permalink", "transform": "absolute_url"},
+        {"name": "author", "selector": ":self", "attribute": "author", "transform": "strip"},
+        {"name": "score", "selector": ":self", "attribute": "score", "transform": "strip"},
+        {"name": "timestamp", "selector": ":self", "attribute": "created-timestamp", "transform": null},
+        {"name": "comments_count", "selector": ":self", "attribute": "comment-count", "transform": "strip"}
+      ],
+      "next_page_selector": null,
+      "scroll_target": "body",
+      "json_ld": false,
+      "mutation_target": null,
+      "max_pages": 1,
+      "max_scroll_iterations": 25
+    },
+    "scrape_interval_seconds": 300,
+    "enabled": true,
+    "auth_ref": null,
+    "health": {
+      "last_run_at": null,
+      "last_status": null,
+      "consecutive_failures": 0,
+      "average_latency_ms": 0.0,
+      "total_runs": 0,
+      "total_events_scraped": 0
+    }
+  },
+  {
+    "source_id": "quotes_to_scrape",
+    "name": "Quotes to Scrape",
+    "url": "http://quotes.toscrape.com/scroll",
+    "adapter_type": "playwright",
+    "extraction": {
+      "item_selector": ".quote",
+      "fields": [
+        {
+          "name": "title",
+          "selector": ".text",
+          "attribute": null,
+          "transform": "strip"
+        },
+        {
+          "name": "author",
+          "selector": ".author",
+          "attribute": null,
+          "transform": "strip"
+        },
+        {
+          "name": "tags",
+          "selector": ".tags",
+          "attribute": null,
+          "transform": "strip"
+        },
+        {
+          "name": "url",
+          "selector": "span a",
+          "attribute": "href",
+          "transform": null
+        }
+      ],
+      "next_page_selector": null,
+      "scroll_target": "body",
+      "json_ld": false,
+      "mutation_target": null,
+      "max_pages": 1,
+      "max_scroll_iterations": 25
+    },
+    "scrape_interval_seconds": 3600,
+    "enabled": true,
+    "auth_ref": null,
+    "health": {
+      "last_run_at": null,
+      "last_status": null,
+      "consecutive_failures": 0,
+      "average_latency_ms": 0.0,
+      "total_runs": 0,
+      "total_events_scraped": 0
+    }
+  },
+  {
+    "source_id": "books_to_scrape",
+    "name": "Books to Scrape",
+    "url": "http://books.toscrape.com",
+    "adapter_type": "rate_limited_http",
+    "extraction": {
+      "item_selector": "article.product_pod",
+      "fields": [
+        {
+          "name": "title",
+          "selector": "h3 a",
+          "attribute": "title",
+          "transform": "strip"
+        },
+        {
+          "name": "url",
+          "selector": "h3 a",
+          "attribute": "href",
+          "transform": null
+        },
+        {
+          "name": "score",
+          "selector": ".star-rating",
+          "attribute": "class",
+          "transform": "strip"
+        },
+        {
+          "name": "price",
+          "selector": ".price_color",
+          "attribute": null,
+          "transform": "strip"
+        },
+        {
+          "name": "availability",
+          "selector": ".availability",
+          "attribute": null,
+          "transform": "strip"
+        }
+      ],
+      "next_page_selector": ".pager .next a",
+      "scroll_target": null,
+      "json_ld": false,
+      "mutation_target": null,
+      "max_pages": 50,
+      "max_scroll_iterations": 0
+    },
+    "scrape_interval_seconds": 3600,
+    "enabled": true,
+    "auth_ref": null,
+    "health": {
+      "last_run_at": null,
+      "last_status": null,
+      "consecutive_failures": 0,
+      "average_latency_ms": 0.0,
+      "total_runs": 0,
+      "total_events_scraped": 0
+    }
+  },
+  {
+    "source_id": "wikipedia_recent_changes",
+    "name": "Wikipedia Recent Changes",
+    "url": "https://en.wikipedia.org/wiki/Special:RecentChanges",
+    "adapter_type": "live_update",
+    "extraction": {
+      "item_selector": "li.mw-changeslist-line",
+      "fields": [
+        {
+          "name": "title",
+          "selector": "a.mw-changeslist-title, .mw-changeslist-log-entry > a[href^='/wiki/']:not([class])",
+          "attribute": null,
+          "transform": "strip"
+        },
+        {
+          "name": "url",
+          "selector": "a.mw-changeslist-title, .mw-changeslist-log-entry > a[href^='/wiki/']:not([class])",
+          "attribute": "href",
+          "transform": "absolute_url"
+        },
+        {
+          "name": "author",
+          "selector": ".mw-userlink, a.mw-userlink",
+          "attribute": null,
+          "transform": "strip"
+        },
+        {
+          "name": "timestamp",
+          "selector": ".mw-changeslist-date",
+          "attribute": null,
+          "transform": "strip"
+        },
+        {
+          "name": "change_size",
+          "selector": ".mw-diff-bytes, .mw-plusminus-pos, .mw-plusminus-neg",
+          "attribute": null,
+          "transform": "strip",
+          "optional": true
+        },
+        {
+          "name": "edit_summary",
+          "selector": ".comment",
+          "attribute": null,
+          "transform": "strip",
+          "optional": true
+        }
+      ],
+      "next_page_selector": null,
+      "scroll_target": null,
+      "json_ld": false,
+      "mutation_target": ".mw-changeslist, #mw-content-text",
+      "max_pages": 1,
+      "max_scroll_iterations": 60
+    },
+    "scrape_interval_seconds": 120,
+    "enabled": true,
+    "auth_ref": null,
+    "health": {
+      "last_run_at": null,
+      "last_status": null,
+      "consecutive_failures": 0,
+      "average_latency_ms": 0.0,
+      "total_runs": 0,
+      "total_events_scraped": 0
+    }
+  }
+]
